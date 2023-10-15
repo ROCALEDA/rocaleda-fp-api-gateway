@@ -16,11 +16,13 @@ class Initializer:
         self.init_candidate_module()
 
     def init_health_module(self):
+        print("Initializing health module")
         health_service = HealthService()
         health_controller.initialize(health_service)
         self.app.include_router(health_controller.router)
 
     def init_candidate_module(self):
+        print("Initializing candidate module")
         candidate_repository = CandidateRepository()
         candidate_service = CandidateService(candidate_repository)
         candidate_controller.initialize(candidate_service)

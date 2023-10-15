@@ -18,7 +18,7 @@ class CandidateRepository:
                     raise HTTPException(
                         status_code=response.status_code, detail=response.text
                     )
-
+                print(f"response {response}")
                 return response.json()
             except Exception as e:
                 print(e)

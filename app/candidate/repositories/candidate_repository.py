@@ -21,8 +21,11 @@ class CandidateRepository:
                 print(f"response {response}")
                 return response.json()
             except Exception as e:
-                print(e)
-                raise HTTPException(status_code=500, detail="Internal Server Error")
+                print("Error on url call: ", e)
+                raise HTTPException(
+                    status_code=500,
+                    detail="Internal Server Error",
+                )
 
     def __build_request_uri(self, host: str, endpoint: str) -> str:
         return f"https://{host}/{endpoint}"

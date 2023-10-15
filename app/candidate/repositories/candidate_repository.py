@@ -9,7 +9,7 @@ class CandidateRepository:
     async def create_candidate(self, request: Request):
         async with httpx.AsyncClient() as client:
             body = await request.json()
-            uri = self.__build_request_uri(settings.users_ms, "user/candidate")
+            uri = self.__build_request_uri(settings.users_ms, "user/candidate/")
             response = await client.post(uri, json=body)
 
             if 400 <= response.status_code < 600:
@@ -20,4 +20,4 @@ class CandidateRepository:
             return response.json()
 
     def __build_request_uri(self, host: str, endpoint: str) -> str:
-        return f"http://{host}/{endpoint}"
+        return f"https://{host}/{endpoint}"

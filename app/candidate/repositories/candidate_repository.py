@@ -10,18 +10,16 @@ class CandidateRepository:
         async with httpx.AsyncClient() as client:
             try:
                 body = await request.json()
-                uri = self.__build_request_uri(settings.users_ms, "user/candidate/")
+                uri = self.__build_request_uri(settings.users_ms, "user/candidate")
                 print(f"Sending {body} to {uri}")
                 response = await client.post(uri, json=body, timeout=60)
 
-                if 300 <= response.status_code < 600:
+                if 400 <= response.status_code < 600:
                     raise HTTPException(
                         status_code=response.status_code, detail=response.text
                     )
-                print(f"response {response}")
                 return response.json()
             except Exception as e:
-                print("Error on url call: ", e)
                 raise HTTPException(
                     status_code=500,
                     detail="Internal Server Error",

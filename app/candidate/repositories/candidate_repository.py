@@ -14,7 +14,7 @@ class CandidateRepository:
                 print(f"Sending {body} to {uri}")
                 response = await client.post(uri, json=body, timeout=60)
 
-                if 400 <= response.status_code < 600:
+                if 300 <= response.status_code < 600:
                     raise HTTPException(
                         status_code=response.status_code, detail=response.text
                     )

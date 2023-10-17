@@ -20,6 +20,7 @@ class Initializer:
     def setup(self):
         self.init_health_module()
         self.init_candidate_module()
+        self.init_customer_module()
 
     def init_health_module(self):
         print("Initializing health module")

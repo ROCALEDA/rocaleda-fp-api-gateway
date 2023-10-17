@@ -1,5 +1,11 @@
 from fastapi import FastAPI
 
+from app.candidate.controllers import candidate_controller
+from app.candidate.repositories.candidate_repository import CandidateRepository
+from app.candidate.services.candidate_service import CandidateService
+from app.customer.controllers import customer_controller
+from app.customer.repositories.customer_repository import CustomerRepository
+from app.customer.services.customer_service import CustomerService
 from app.health.controllers import health_controller
 from app.candidate.controllers import candidate_controller
 from app.health.services.health_service import HealthService
@@ -21,6 +27,7 @@ class Initializer:
         self.init_health_module()
         self.init_candidate_module()
         self.init_authentication_module()
+        self.init_customer_module()
 
     def init_health_module(self):
         print("Initializing health module")
@@ -41,3 +48,10 @@ class Initializer:
         authentication_service = AuthenticationService(authentication_repository)
         authentication_controller.initialize(authentication_service)
         self.app.include_router(authentication_controller.router)
+        
+    def init_customer_module(self):
+        print("Initializing customer module")
+        customer_repository = CustomerRepository()
+        customer_service = CustomerService(customer_repository)
+        customer_controller.initialize(customer_service)
+        self.app.include_router(customer_controller.router)

@@ -1,4 +1,4 @@
-from fastapi import Request
+from fastapi import Request, HTTPException
 
 from app.candidate.repositories.candidate_repository import CandidateRepository
 
@@ -8,4 +8,11 @@ class CandidateService:
         self.candidate_repository = candidate_repository
 
     async def create_candidate(self, request: Request):
-        return await self.candidate_repository.create_candidate(request)
+        try:
+            return await self.candidate_repository.create_candidate(request)
+        except HTTPException as e:
+            print("Http exception: ", e.detail)
+            raise e
+        except Exception as e:
+            print("Internal server error: ", e)
+            raise HTTPException(500, "Internal server error")

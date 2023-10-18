@@ -9,8 +9,14 @@ from app.customer.services.customer_service import CustomerService
 from app.health.controllers import health_controller
 from app.candidate.controllers import candidate_controller
 from app.health.services.health_service import HealthService
+from app.authentication.controllers import authentication_controller
 from app.candidate.services.candidate_service import CandidateService
 from app.candidate.repositories.candidate_repository import CandidateRepository
+from app.authentication.services.authentication_service import AuthenticationService
+
+from app.authentication.repositories.authentication_repository import (
+    AuthenticationRepository,
+)
 
 
 class Initializer:
@@ -20,6 +26,7 @@ class Initializer:
     def setup(self):
         self.init_health_module()
         self.init_candidate_module()
+        self.init_authentication_module()
         self.init_customer_module()
 
     def init_health_module(self):
@@ -35,6 +42,13 @@ class Initializer:
         candidate_controller.initialize(candidate_service)
         self.app.include_router(candidate_controller.router)
 
+    def init_authentication_module(self):
+        print("Initializing authentication module")
+        authentication_repository = AuthenticationRepository()
+        authentication_service = AuthenticationService(authentication_repository)
+        authentication_controller.initialize(authentication_service)
+        self.app.include_router(authentication_controller.router)
+        
     def init_customer_module(self):
         print("Initializing customer module")
         customer_repository = CustomerRepository()

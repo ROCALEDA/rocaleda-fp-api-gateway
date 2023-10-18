@@ -5,6 +5,7 @@ steps:
       - -c
       - |
         sed -i "s|VAR_USERS_MS|$_USERS_MS|g" app.yaml
+        sed -i "s|VAR_AUTHENTICATION_MS|$_AUTHENTICATION_MS|g" app.yaml
         sed -i "s|VAR_PROJECT_ID|$PROJECT_ID|g" app.yaml
         sed -i "s|VAR_REGION|$LOCATION|g" app.yaml
         sed -i "s|VAR_VPC_CONNECTOR|$_VPC_CONNECTOR_NAME|g" app.yaml

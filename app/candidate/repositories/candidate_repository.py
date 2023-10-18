@@ -1,6 +1,7 @@
 import httpx
 from fastapi import Request
 from fastapi import HTTPException
+from app.commons.helpers import build_request_uri
 
 from app.commons.settings import settings
 
@@ -10,7 +11,7 @@ class CandidateRepository:
         async with httpx.AsyncClient() as client:
             try:
                 body = await request.json()
-                uri = self.__build_request_uri(settings.users_ms, "user/candidate")
+                uri = build_request_uri(settings.users_ms, "user/candidate")
                 print(f"Sending {body} to {uri}")
                 response = await client.post(uri, json=body, timeout=60)
 
@@ -24,6 +25,3 @@ class CandidateRepository:
                     status_code=500,
                     detail="Internal Server Error",
                 )
-
-    def __build_request_uri(self, host: str, endpoint: str) -> str:
-        return f"https://{host}/{endpoint}"

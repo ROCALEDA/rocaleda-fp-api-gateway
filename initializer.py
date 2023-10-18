@@ -48,7 +48,7 @@ class Initializer:
         authentication_service = AuthenticationService(authentication_repository)
         authentication_controller.initialize(authentication_service)
         self.app.include_router(authentication_controller.router)
-        
+
     def init_customer_module(self):
         print("Initializing customer module")
         customer_repository = CustomerRepository()

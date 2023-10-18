@@ -8,6 +8,7 @@ instance_class: F2
 
 env_variables:
     USERS_MS: VAR_USERS_MS
+    AUTHENTICATION_MS: VAR_AUTHENTICATION_MS
 
 vpc_access_connector:
     name: projects/VAR_PROJECT_ID/locations/VAR_REGION/connectors/VAR_VPC_CONNECTOR

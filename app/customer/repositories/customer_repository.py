@@ -26,11 +26,13 @@ class CustomerRepository:
                     detail="Internal Server Error",
                 )
 
-    async def create_project(self, request: Request):
+    async def create_project(self, customer_id: int, request: Request):
         async with httpx.AsyncClient() as client:
             try:
                 body = await request.json()
-                uri = build_request_uri(settings.customers_ms, "customer/project")
+                uri = build_request_uri(
+                    settings.customers_ms, f"customer/{customer_id}/project"
+                )
                 print(f"Sending {body} to {uri}")
                 response = await client.post(uri, json=body, timeout=60)
 

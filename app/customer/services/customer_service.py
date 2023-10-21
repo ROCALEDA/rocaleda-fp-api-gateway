@@ -15,5 +15,5 @@ class CustomerService:
         received_token = extract_token(request)
         await validate_token(request, received_token)
         return await self.customer_repository.create_project(
-            request.state.user_data.iuser_id, request
+            request.state.user_data.user_id, request
         )

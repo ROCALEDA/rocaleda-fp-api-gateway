@@ -14,5 +14,5 @@ class CustomerService:
     async def create_project(self, request: Request):
         received_token = extract_token(request)
         await validate_token(request, received_token)
-        print(request.state)
+        print(request.state.__dict__)
         return await self.customer_repository.create_project(request)

@@ -25,7 +25,7 @@ class CustomerRepository:
         async with httpx.AsyncClient() as client:
             body = await request.json()
             uri = build_request_uri(
-                settings.customers_ms, f"customer/{customer_id}/projects"
+                settings.customers_ms, f"customers/{customer_id}/projects"
             )
             print(f"Sending {body} to {uri}")
             response = await client.post(uri, json=body, timeout=60)
@@ -40,7 +40,7 @@ class CustomerRepository:
     async def get_customer_projects(self, customer_id: int, request: Request):
         async with httpx.AsyncClient() as client:
             uri = build_request_uri(
-                settings.customers_ms, f"customer/{customer_id}/projects"
+                settings.customers_ms, f"customers/{customer_id}/projects"
             )
             print(f"Sending {request.query_params} to {uri}")
             response = await client.get(uri, params=request.query_params, timeout=60)

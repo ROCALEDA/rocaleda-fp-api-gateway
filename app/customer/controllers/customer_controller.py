@@ -17,3 +17,7 @@ def initialize(customer_service: CustomerService):
     @router.post("/project")
     async def create_project(request: Request):
         return await customer_service.create_project(request)
+
+    @router.get("/projects")
+    async def get_customer_projects(request: Request):
+        return await customer_service.get_customer_projects(request)

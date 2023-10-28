@@ -16,3 +16,13 @@ class CandidateService:
         except Exception as e:
             print("Internal server error: ", e)
             raise HTTPException(500, "Internal server error")
+
+    async def get_candidates_paginated(self, request: Request):
+        try:
+            return await self.candidate_repository.get_candidates_paginated(request)
+        except HTTPException as e:
+            print("Http exception: ", e.detail)
+            raise e
+        except Exception as e:
+            print("Internal server error: ", e)
+            raise HTTPException(500, "Internal server error")

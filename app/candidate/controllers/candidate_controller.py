@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Request
 
-# from fastapi import Depends
-# from app.commons.auth import validate_token
+from fastapi import Depends
+from app.commons.auth import validate_token
 
 from app.candidate.services.candidate_service import CandidateService
 
@@ -17,8 +17,6 @@ def initialize(candidate_service: CandidateService):
     async def create_candidate(request: Request):
         return await candidate_service.create_candidate(request)
 
-    # @router.get("/health")
-    # async def authenticated_health(request: Request, _=Depends(validate_token)):
-    #     print(request.state.user_data)
-    #     print("Inside authenticated health")
-    #     return "Ok"
+    @router.get("")
+    async def get_candidates_paginated(request: Request, _=Depends(validate_token)):
+        return await candidate_service.get_candidates_paginated(request)

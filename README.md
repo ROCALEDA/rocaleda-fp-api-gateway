@@ -1,7 +1,6 @@
 # API Gateway ABC Jobs
 
 
-
 ## Cómo ejecutar
 
 1. Clonar el repositorio

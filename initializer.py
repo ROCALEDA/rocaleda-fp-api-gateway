@@ -13,6 +13,9 @@ from app.customer.repositories.customer_repository import CustomerRepository
 from app.customer.services.customer_service import CustomerService
 from app.health.controllers import health_controller
 from app.health.services.health_service import HealthService
+from app.position.controllers import position_controller
+from app.position.repositories.position_repository import PositionRepository
+from app.position.services.position_service import PositionService
 
 
 class Initializer:
@@ -24,6 +27,7 @@ class Initializer:
         self.init_authentication_module()
         self.init_candidate_module()
         self.init_customer_module()
+        self.init_position_module()
 
     def init_health_module(self):
         print("Initializing health module")
@@ -51,3 +55,10 @@ class Initializer:
         customer_service = CustomerService(customer_repository)
         customer_controller.initialize(customer_service)
         self.app.include_router(customer_controller.router)
+
+    def init_position_module(self):
+        print("Initializing position module")
+        position_repository = PositionRepository()
+        position_service = PositionService(position_repository)
+        position_controller.initialize(position_service)
+        self.app.include_router(position_controller.router)

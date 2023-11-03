@@ -1,7 +1,7 @@
 from fastapi import Request, HTTPException
 
-from app.customer.repositories.customer_repository import CustomerRepository
 from app.commons.auth import extract_token, validate_token
+from app.customer.repositories.customer_repository import CustomerRepository
 
 
 class CustomerService:

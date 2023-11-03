@@ -1,9 +1,7 @@
-from fastapi import APIRouter, Request
-
-from fastapi import Depends
-from app.commons.auth import validate_token
+from fastapi import APIRouter, Depends, Request
 
 from app.candidate.services.candidate_service import CandidateService
+from app.commons.auth import validate_token
 
 router = APIRouter(
     prefix="/candidate",

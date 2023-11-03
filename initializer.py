@@ -1,10 +1,10 @@
 from fastapi import FastAPI
 
 from app.authentication.controllers import authentication_controller
-from app.authentication.services.authentication_service import AuthenticationService
 from app.authentication.repositories.authentication_repository import (
     AuthenticationRepository,
 )
+from app.authentication.services.authentication_service import AuthenticationService
 from app.candidate.controllers import candidate_controller
 from app.candidate.repositories.candidate_repository import CandidateRepository
 from app.candidate.services.candidate_service import CandidateService

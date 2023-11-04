@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, Request
-from app.commons.auth import validate_token
 
+from app.commons.auth import validate_token
 from app.position.services.position_service import PositionService
 
 router = APIRouter(
@@ -17,4 +17,8 @@ def initialize(position_service: PositionService):
 
     @router.get("/{position_id}/candidates")
     async def get_position_candidates_info(request: Request, position_id: int):
+        return await position_service.get_position_candidates_info(request, position_id)
+
+    @router.get("/{position_id}")
+    async def update_position_chosen_candidate(request: Request, position_id: int):
         return await position_service.get_position_candidates_info(request, position_id)

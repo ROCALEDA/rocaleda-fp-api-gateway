@@ -19,6 +19,8 @@ def initialize(position_service: PositionService):
     async def get_position_candidates_info(request: Request, position_id: int):
         return await position_service.get_position_candidates_info(request, position_id)
 
-    @router.get("/{position_id}")
+    @router.patch("/{position_id}")
     async def update_position_chosen_candidate(request: Request, position_id: int):
-        return await position_service.get_position_candidates_info(request, position_id)
+        return await position_service.update_position_chosen_candidate(
+            request, position_id
+        )

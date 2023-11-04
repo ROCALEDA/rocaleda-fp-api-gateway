@@ -9,7 +9,7 @@ class PositionRepository:
     async def get_positions(self, request: Request):
         async with httpx.AsyncClient() as client:
             uri = build_request_uri(settings.customers_ms, "positions")
-            print(f"Sending {request.query_params} to {uri}")
+            print(f"Sending {request.query_params} to GET {uri}")
             response = await client.get(uri, timeout=60)
             if 400 <= response.status_code < 600:
                 error_detail = response.json().get("detail", response.text)
@@ -23,7 +23,7 @@ class PositionRepository:
             uri = build_request_uri(
                 settings.orchestrator_ms, f"positions/{position_id}/candidates"
             )
-            print(f"Sending {request.query_params} to {uri}")
+            print(f"Sending {request.query_params} to GET {uri}")
             response = await client.get(uri, timeout=60)
             if 400 <= response.status_code < 600:
                 error_detail = response.json().get("detail", response.text)
@@ -39,7 +39,7 @@ class PositionRepository:
         async with httpx.AsyncClient() as client:
             body = await request.json()
             uri = build_request_uri(settings.customers_ms, f"positions/{position_id}")
-            print(f"Sending {body} to {uri}")
+            print(f"Sending {body} to PATCH {uri}")
             response = await client.patch(uri, json=body, timeout=60)
             if 400 <= response.status_code < 600:
                 error_detail = response.json().get("detail", response.text)

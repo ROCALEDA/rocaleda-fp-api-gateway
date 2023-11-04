@@ -1,8 +1,7 @@
 import httpx
-from fastapi import Request
-from fastapi import HTTPException
-from app.commons.helpers import build_request_uri
+from fastapi import HTTPException, Request
 
+from app.commons.helpers import build_request_uri
 from app.commons.settings import settings
 
 

@@ -1,8 +1,5 @@
+from fastapi import HTTPException, Request
 from typing import TYPE_CHECKING
-
-from fastapi import Request
-from fastapi import HTTPException
-
 
 if TYPE_CHECKING:
     from app.authentication.repositories.authentication_repository import (

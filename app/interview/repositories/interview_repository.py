@@ -13,9 +13,9 @@ class InterviewRepository:
             reroute_params = {
                 "user_id": user_id,
             }
-            if len(request.query_params.get("page")) > 0:
+            if request.query_params.get("page") is not None:
                 reroute_params["page"] = request.query_params.get("page")
-            if len(request.query_params.get("limit")) > 0:
+            if request.query_params.get("limit") is not None:
                 reroute_params["limit"] = request.query_params.get("limit")
             print(
                 f"Sending params {reroute_params} and headers {reroute_headers} to GET {uri}"

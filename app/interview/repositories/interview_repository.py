@@ -8,7 +8,7 @@ from app.commons.settings import settings
 class InterviewRepository:
     async def get_interviews_paginated(self, role: str, user_id: str, request: Request):
         async with httpx.AsyncClient() as client:
-            uri = build_request_uri(settings.candidates_ms, "interviews")
+            uri = build_request_uri(settings.orchestrator_ms, "interviews")
             reroute_headers = {"role": role}
             reroute_params = {
                 "user_id": user_id,

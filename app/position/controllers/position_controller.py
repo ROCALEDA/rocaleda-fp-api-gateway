@@ -15,6 +15,18 @@ def initialize(position_service: PositionService):
     async def get_positions(request: Request, _=Depends(validate_token)):
         return await position_service.get_positions(request)
 
+    @router.get("/closed/{project_id}")
+    async def get_closed_positions_with_candidates(
+        request: Request, project_id: int, _=Depends(validate_token)
+    ):
+        return await position_service.get_closed_positions_with_candidates(
+            request, project_id
+        )
+
+    @router.post("/evaluations")
+    async def create_evaluation(request: Request, _=Depends(validate_token)):
+        return await position_service.create_evaluation(request)
+
     @router.get("/{position_id}/candidates")
     async def get_position_candidates_info(request: Request, position_id: int):
         return await position_service.get_position_candidates_info(request, position_id)

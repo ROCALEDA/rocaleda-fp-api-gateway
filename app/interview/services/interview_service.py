@@ -13,7 +13,7 @@ class InterviewService:
             received_token = extract_token(request)
             await validate_token(request, received_token)
             await self.interview_repository.get_interviews_paginated(
-                str(request.state.user_data["role"]),
+                str(request.state.user_data["role_id"]),
                 str(request.state.user_data["user_id"]),
                 request,
             )

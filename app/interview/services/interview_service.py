@@ -13,8 +13,8 @@ class InterviewService:
             received_token = extract_token(request)
             await validate_token(request, received_token)
             await self.interview_repository.get_interviews_paginated(
-                request.state.user_data["role"],
-                request.state.user_data["user_id"],
+                str(request.state.user_data["role"]),
+                str(request.state.user_data["user_id"]),
                 request,
             )
             return await self.customer_repository.get_customer_projects(

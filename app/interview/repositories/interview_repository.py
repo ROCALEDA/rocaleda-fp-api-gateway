@@ -6,14 +6,20 @@ from app.commons.settings import settings
 
 
 class InterviewRepository:
-    async def get_interviews_paginated(self, role: int, user_id: int, request: Request):
+    async def get_interviews_paginated(self, role: str, user_id: str, request: Request):
         async with httpx.AsyncClient() as client:
             uri = build_request_uri(settings.candidates_ms, "interviews")
-            request.headers["role"] = role
-            request.query_params["user_id"] = user_id
-            print(f"Sending {request.query_params} and {request.headers} to GET {uri}")
+            reroute_headers = {"role": role}
+            reroute_params = {
+                "user_id": user_id,
+                "page": request.query_params.get("page"),
+                "limit": request.query_params.get("limit"),
+            }
+            print(
+                f"Sending params {reroute_params} and headers {reroute_headers} to GET {uri}"
+            )
             response = await client.get(
-                uri, params=request.query_params, headers=request.headers, timeout=60
+                uri, params=reroute_params, headers=reroute_headers, timeout=60
             )
             if 400 <= response.status_code < 600:
                 error_detail = response.json().get("detail", response.text)

@@ -30,6 +30,7 @@ class Initializer:
         self.init_authentication_module()
         self.init_candidate_module()
         self.init_customer_module()
+        self.init_interview_module()
         self.init_position_module()
 
     def init_health_module(self):

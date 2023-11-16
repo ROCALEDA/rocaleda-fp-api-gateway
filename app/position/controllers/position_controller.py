@@ -36,3 +36,7 @@ def initialize(position_service: PositionService):
         return await position_service.update_position_chosen_candidate(
             request, position_id
         )
+
+    @router.post("/{position_id}/tests")
+    async def save_technical_test_result(request: Request, position_id: int):
+        return await position_service.save_technical_test_result(request, position_id)

@@ -76,3 +76,18 @@ class PositionRepository:
                     status_code=response.status_code, detail=error_detail
                 )
             return response.json()
+
+    async def save_technical_test_result(self, request: Request, position_id: int):
+        async with httpx.AsyncClient() as client:
+            body = await request.json()
+            uri = build_request_uri(
+                settings.customers_ms, f"positions/{position_id}/tests"
+            )
+            print(f"Sending {body} to POST {uri}")
+            response = await client.post(uri, json=body, timeout=60)
+            if 400 <= response.status_code < 600:
+                error_detail = response.json().get("detail", response.text)
+                raise HTTPException(
+                    status_code=response.status_code, detail=error_detail
+                )
+            return response.json()

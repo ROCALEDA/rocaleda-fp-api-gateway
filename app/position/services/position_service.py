@@ -71,3 +71,17 @@ class PositionService:
         except Exception as e:
             print("Internal server error: ", e)
             raise HTTPException(500, "Internal server error")
+
+    async def save_technical_test_result(self, request: Request, position_id: int):
+        try:
+            received_token = extract_token(request)
+            await validate_token(request, received_token)
+            return await self.position_repository.save_technical_test_result(
+                request, position_id
+            )
+        except HTTPException as e:
+            print("Http exception: ", e.detail)
+            raise e
+        except Exception as e:
+            print("Internal server error: ", e)
+            raise HTTPException(500, "Internal server error")

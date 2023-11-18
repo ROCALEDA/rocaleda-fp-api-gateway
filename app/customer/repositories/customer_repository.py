@@ -50,3 +50,39 @@ class CustomerRepository:
                     status_code=response.status_code, detail=error_detail
                 )
             return response.json()
+
+    async def get_customer_performance_evaluations(
+        self, customer_id: int, request: Request
+    ):
+        async with httpx.AsyncClient() as client:
+            uri = build_request_uri(
+                settings.customers_ms,
+                f"customers/performance_evaluations/{customer_id}",
+            )
+            print(f"Sending request to {uri}")
+            response = await client.get(uri, timeout=60)
+
+            if 400 <= response.status_code < 600:
+                error_detail = response.json().get("detail", response.text)
+                raise HTTPException(
+                    status_code=response.status_code, detail=error_detail
+                )
+            return response.json()
+
+    async def get_candidate_performance_evaluations(
+        self, candidate_id: int, request: Request
+    ):
+        async with httpx.AsyncClient() as client:
+            uri = build_request_uri(
+                settings.customers_ms,
+                f"customers/candidates/performance_evaluations/{candidate_id}",
+            )
+            print(f"Sending request to {uri}")
+            response = await client.get(uri, timeout=60)
+
+            if 400 <= response.status_code < 600:
+                error_detail = response.json().get("detail", response.text)
+                raise HTTPException(
+                    status_code=response.status_code, detail=error_detail
+                )
+            return response.json()

@@ -73,3 +73,31 @@ class CustomerService:
         except Exception as e:
             print("Internal server error: ", e)
             raise HTTPException(500, "Internal server error") from e
+
+    async def get_customer_technical_tests(self, request: Request):
+        try:
+            received_token = extract_token(request)
+            await validate_token(request, received_token)
+            return await self.customer_repository.get_customer_technical_tests(
+                request.state.user_data["user_id"], request
+            )
+        except HTTPException as e:
+            print("Http exception: ", e.detail)
+            raise e
+        except Exception as e:
+            print("Internal server error: ", e)
+            raise HTTPException(500, "Internal server error") from e
+
+    async def get_candidate_technical_tests(self, request: Request):
+        try:
+            received_token = extract_token(request)
+            await validate_token(request, received_token)
+            return await self.customer_repository.get_candidate_technical_tests(
+                request.state.user_data["user_id"], request
+            )
+        except HTTPException as e:
+            print("Http exception: ", e.detail)
+            raise e
+        except Exception as e:
+            print("Internal server error: ", e)
+            raise HTTPException(500, "Internal server error") from e

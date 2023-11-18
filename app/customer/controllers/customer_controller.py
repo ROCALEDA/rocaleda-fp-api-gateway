@@ -29,3 +29,11 @@ def initialize(customer_service: CustomerService):
     @router.get("/candidates/performance_evaluations")
     async def get_candidate_performance_evaluations(request: Request):
         return await customer_service.get_candidate_performance_evaluations(request)
+
+    @router.get("/technical_tests")
+    async def get_customer_technical_tests(request: Request):
+        return await customer_service.get_customer_technical_tests(request)
+
+    @router.get("/candidates/technical_tests")
+    async def get_candidate_technical_tests(request: Request):
+        return await customer_service.get_candidate_technical_tests(request)

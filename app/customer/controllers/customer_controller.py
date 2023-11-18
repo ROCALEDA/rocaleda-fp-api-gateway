@@ -21,3 +21,11 @@ def initialize(customer_service: CustomerService):
     @router.get("/projects")
     async def get_customer_projects(request: Request):
         return await customer_service.get_customer_projects(request)
+
+    @router.get("/performance_evaluations")
+    async def get_customer_performance_evaluations(request: Request):
+        return await customer_service.get_customer_performance_evaluations(request)
+
+    @router.get("/candidates/performance_evaluations")
+    async def get_candidate_performance_evaluations(request: Request):
+        return await customer_service.get_candidate_performance_evaluations(request)

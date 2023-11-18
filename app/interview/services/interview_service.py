@@ -23,3 +23,13 @@ class InterviewService:
         except Exception as e:
             print("Internal server error: ", e)
             raise HTTPException(500, "Internal server error")
+
+    async def create_interview(self, request: Request):
+        try:
+            return await self.interview_repository.create_interview(request)
+        except HTTPException as e:
+            print("Http exception: ", e.detail)
+            raise e
+        except Exception as e:
+            print("Internal server error: ", e)
+            raise HTTPException(500, "Internal server error") from e

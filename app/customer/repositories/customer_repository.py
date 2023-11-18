@@ -118,3 +118,4 @@ class CustomerRepository:
                     status_code=response.status_code, detail=error_detail
                 )
             return response.json()
+

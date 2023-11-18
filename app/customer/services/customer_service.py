@@ -101,3 +101,4 @@ class CustomerService:
         except Exception as e:
             print("Internal server error: ", e)
             raise HTTPException(500, "Internal server error") from e
+

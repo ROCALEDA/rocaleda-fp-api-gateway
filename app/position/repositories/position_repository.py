@@ -91,3 +91,18 @@ class PositionRepository:
                     status_code=response.status_code, detail=error_detail
                 )
             return response.json()
+
+    async def create_candidate_in_position(self, position_id: int, candidate_id: int):
+        async with httpx.AsyncClient() as client:
+            uri = build_request_uri(
+                settings.customers_ms,
+                f"positions/{position_id}/candidates/{candidate_id}",
+            )
+            print(f"Sending request to POST {uri}")
+            response = await client.post(uri, timeout=60)
+            if 400 <= response.status_code < 600:
+                error_detail = response.json().get("detail", response.text)
+                raise HTTPException(
+                    status_code=response.status_code, detail=error_detail
+                )
+            return response.json()

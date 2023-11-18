@@ -85,3 +85,15 @@ class PositionService:
         except Exception as e:
             print("Internal server error: ", e)
             raise HTTPException(500, "Internal server error")
+
+    async def create_candidate_in_position(self, position_id: int, candidate_id: int):
+        try:
+            return await self.position_repository.create_candidate_in_position(
+                position_id, candidate_id
+            )
+        except HTTPException as e:
+            print("Http exception: ", e.detail)
+            raise e
+        except Exception as e:
+            print("Internal server error: ", e)
+            raise HTTPException(500, "Internal server error") from e

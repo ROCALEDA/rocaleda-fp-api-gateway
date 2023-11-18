@@ -37,6 +37,14 @@ def initialize(position_service: PositionService):
             request, position_id
         )
 
+    @router.post("/{position_id}/candidates/{candidate_id}")
+    async def create_candidate_in_position(
+        request: Request, position_id: int, candidate_id: int, _=Depends(validate_token)
+    ):
+        return await position_service.create_candidate_in_position(
+            position_id, candidate_id
+        )
+
     @router.post("/{position_id}/tests")
     async def save_technical_test_result(request: Request, position_id: int):
         return await position_service.save_technical_test_result(request, position_id)
